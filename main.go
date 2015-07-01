@@ -10,13 +10,13 @@
 // The ordering of the PDFs will be defined by the page number.
 //
 // This script is just a quick hack to do three things:
-// 
-// 1. Create a latex file 'proceedings.tex' based on the pdf files in 
+//
+// 1. Create a latex file 'proceedings.tex' based on the pdf files in
 //    the folders. This is obtained by running:
 //      go run main.go -latex > proceedings.tex
 //
 //    The script does not compile the latex file to generate proceedings.pdf
-// 
+//
 // 2. Once you have compiled the 'proceedings.pdf' you can run:
 //      go run main.go -split > split.sh
 //
@@ -43,7 +43,6 @@
 // % brew info poppler
 // poppler: stable 0.29.0 (bottled)
 // http://poppler.freedesktop.org
-
 
 package main
 
@@ -87,14 +86,14 @@ var (
 func main() {
 	root := flag.String("dir", ".", "Directory containing folders of papers")
 	last = flag.Int("last", 371, "Page number of last page of proceedings")
-    latex := flag.Bool("latex", false, "Generate latex file 'proceedings.tex'")
-    split := flag.Bool("split", false, "Split the 'proceedings.pdf' file into separate pages")
-    unite := flag.Bool("unite", false, "Unite single page PDF files to one PDF for each paper")
-    flag.Usage = func() {
-            fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS]\n", os.Args[0])
-            fmt.Fprintf(os.Stderr, "\nOptions:\n")
-            flag.PrintDefaults()
-    }
+	latex := flag.Bool("latex", false, "Generate latex file 'proceedings.tex'")
+	split := flag.Bool("split", false, "Split the 'proceedings.pdf' file into separate pages")
+	unite := flag.Bool("unite", false, "Unite single page PDF files to one PDF for each paper")
+	flag.Usage = func() {
+		fmt.Fprintf(os.Stderr, "Usage: %s [OPTIONS]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "\nOptions:\n")
+		flag.PrintDefaults()
+	}
 	flag.Parse()
 
 	err := filepath.Walk(*root, visit)
